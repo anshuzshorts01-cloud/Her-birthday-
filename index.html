@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Navya! ✨</title>
+    <!-- Stable Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Cute & Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Poppins:wght@300;400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Premium Particles -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        fun: ['Fredoka', 'sans-serif'],
+                        cursive: ['Caveat', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
+        }
+        .no-scroll { overflow: hidden; }
+        
+        /* Floating Clouds Background Effect */
+        .sky-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1; opacity: 0.12;
+        }
+        .cloud { position: absolute; background: #ffffff; border-radius: 100px; filter: blur(6px); }
+        .cloud::before, .cloud::after { content: ''; position: absolute; background: #ffffff; border-radius: 50%; }
+        .c1 { width: 250px; height: 80px; top: 15%; animation: floatLeft 35s linear infinite; }
+        .c1::before { width: 110px; height: 110px; top: -55px; left: 35px; }
+        .c1::after { width: 130px; height: 130px; top: -70px; right: 35px; }
+        .c2 { width: 350px; height: 100px; top: 65%; animation: floatRight 50s linear infinite; }
+        .c2::before { width: 150px; height: 150px; top: -75px; left: 45px; }
+        .c2::after { width: 170px; height: 170px; top: -95px; right: 45px; }
+
+        @keyframes floatLeft { 0% { transform: translateX(100vw); } 100% { transform: translateX(-400px); } }
+        @keyframes floatRight { 0% { transform: translateX(-400px); } 100% { transform: translateX(100vw); } }
+
+        /* Camera Flash */
+        #flash-effect {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; opacity: 0; pointer-events: none; z-index: 100;
+            transition: opacity 0.1s ease-out;
+        }
+        
+        /* Memory Reveal */
+        .memory-card {
+            opacity: 0; transform: scale(0.8) translateY(40px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .memory-card.reveal { opacity: 1; transform: scale(1) translateY(0) rotate(var(--r)); }
+
+        /* Name Neon Pulsing Glow */
+        .neon-glow-name {
+            animation: neonPulse 2.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        @keyframes neonPulse {
+            0% { transform: scale(1); text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
+            100% { transform: scale(1.03); text-shadow: 0 0 25px rgba(56, 189, 248, 0.9), 0 0 40px rgba(2, 132, 199, 0.6); }
+        }
+    </style>
+</head>
+<body class="no-scroll text-slate-200 antialiased selection:bg-sky-500/30 relative font-sans">
+
+    <div id="flash-effect"></div>
+
+    <!-- Animated Sky Clouds -->
+    <div class="sky-bg">
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="cloud c1" style="top: 40%; animation-duration: 45s;"></div>
+    </div>
+
+    <!-- 1. LOCK SCREEN -->
+    <div id="lock-screen" class="fixed inset-0 bg-slate-950 z-50 flex flex-col items-center justify-center p-4 transition-all duration-1000 ease-in-out">
+        <div class="max-w-md w-full bg-slate-900/50 border border-slate-800/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl text-center">
+            <div class="text-4xl mb-2 animate-bounce">🎈 ✨</div>
+            <h2 class="text-2xl font-fun font-semibold tracking-wide text-sky-400">Welcome to Your Surprise</h2>
+            <p class="text-slate-400 text-sm mt-1 mb-4">Specially created for the most amazing person</p>
+            <p class="text-white font-cursive text-5xl mb-6">Navya ✨</p>
+            
+            <!-- Pin Dots -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border border-slate-600 bg-transparent transition-all duration-200"></div>
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border border-slate-600 bg-transparent transition-all duration-200"></div>
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border border-slate-600 bg-transparent transition-all duration-200"></div>
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border border-slate-600 bg-transparent transition-all duration-200"></div>
+            </div>
+
+            <!-- Keypad -->
+            <div class="grid grid-cols-3 gap-4 max-w-[260px] mx-auto">
+                <script>
+                    for(let i=1; i<=9; i++) {
+                        document.write(`<button onclick="pressKey('${i}')" class="w-16 h-16 rounded-full bg-slate-800/40 border border-slate-800 font-fun text-xl text-slate-300 flex items-center justify-center mx-auto active:scale-90 hover:border-sky-400 transition-all">${i}</button>`);
+                    }
+                </script>
+                <button onclick="clearPin()" class="w-16 h-16 text-xs font-bold tracking-wider text-slate-500 hover:text-slate-300 flex items-center justify-center mx-auto">RESET</button>
+                <button onclick="pressKey('0')" class="w-16 h-16 rounded-full bg-slate-800/40 border border-slate-800 font-fun text-xl text-slate-300 flex items-center justify-center mx-auto active:scale-90 hover:border-sky-400 transition-all">0</button>
+            </div>
+            <p id="error-msg" class="text-rose-400 text-xs mt-6 font-medium hidden tracking-wide">Wrong code Navya! Think of our special date. 😉</p>
+        </div>
+    </div>
+
+    <!-- 2. MAIN HUB CONTENT -->
+    <div id="main-content" class="hidden min-h-screen pb-32 transition-opacity duration-1000 opacity-0 relative z-10">
+        
+        <!-- Welcome Hero Header -->
+        <header class="max-w-4xl mx-auto text-center pt-24 pb-12 px-4">
+            <span class="bg-sky-500/10 border border-sky-500/30 text-sky-400 px-4 py-1 rounded-full text-xs font-semibold tracking-widest uppercase font-fun">Happy Birthday! 🥳</span>
+            <h1 class="text-4xl md:text-5xl font-fun font-bold tracking-tight mt-6 mb-4 text-slate-100">Happy Birthday to My Favorite,</h1>
+            
+            <div class="inline-block my-4">
+                <h2 class="text-7xl md:text-9xl font-cursive text-sky-400 block drop-shadow-md neon-glow-name transition-transform duration-300">Navya</h2>
+            </div>
+            
+            <p class="text-slate-400 max-w-md mx-auto text-sm font-light mt-4 leading-relaxed">I made this website just to make you smile. Scroll down slowly, there are a lot of fun surprises waiting for you! 👇</p>
+        </header>
+
+        <!-- Shutter Camera Section -->
+        <section class="max-w-5xl mx-auto px-6 my-16 text-center">
+            <h3 class="text-base font-fun font-medium text-slate-300 mb-6">Click this magical lens to open your sweet photos! 📸</h3>
+            
+            <button onclick="triggerCamera()" class="relative mx-auto w-24 h-24 rounded-full bg-slate-900 border-2 border-slate-800 hover:border-sky-400 flex items-center justify-center group shadow-2xl transition-all duration-300 active:scale-95 cursor-pointer">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-sky-400 to-blue-500 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <i class="fa-solid fa-camera text-2xl text-slate-900"></i>
+                </div>
+                <div class="absolute top-2 right-6 w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+            </button>
+
+            <!-- Polaroid Grid Layout -->
+            <div id="memory-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
+                <div class="memory-card bg-slate-900 p-4 pb-6 rounded-xl shadow-2xl border border-slate-800/60 cursor-pointer group" style="--r: 2deg;" onclick="openLightbox(this)">
+                    <img src="photo1.jpg" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600'" alt="Memory" class="w-full h-56 object-cover rounded-lg group-hover:scale-103 transition-transform duration-300">
+                    <p class="font-cursive text-3xl text-sky-400 mt-4">The Cutest Face In The World 😍</p>
+                </div>
+                <div class="memory-card bg-slate-900 p-4 pb-6 rounded-xl shadow-2xl border border-slate-800/60 cursor-pointer group" style="--r: -2deg;" onclick="openLightbox(this)">
+                    <img src="photo2.jpg" onerror="this.src='https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600'" alt="Memory" class="w-full h-56 object-cover rounded-lg group-hover:scale-103 transition-transform duration-300">
+                    <p class="font-cursive text-3xl text-sky-400 mt-4">When You Laugh Like A Kid 😂</p>
+                </div>
+                <div class="memory-card bg-slate-900 p-4 pb-6 rounded-xl shadow-2xl border border-slate-800/60 cursor-pointer group" style="--r: 1deg;" onclick="openLightbox(this)">
+                    <img src="photo3.jpg" onerror="this.src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600'" alt="Memory" class="w-full h-56 object-cover rounded-lg group-hover:scale-103 transition-transform duration-300">
+                    <p class="font-cursive text-3xl text-sky-400 mt-4">My All Time Favorite Memory 💖</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FUN FACTOR 1: THE NO FIGHTING TREATY -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <div class="bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-slate-800 p-6 rounded-3xl shadow-xl">
+                <h3 class="font-fun font-bold text-xl text-yellow-400 mb-2">📜 Official Peace Treaty</h3>
+                <p class="text-xs text-slate-400 mb-4">Click the button below to digitally pause all fights! No arguments allowed on your birthday week. 😉</p>
+                <button onclick="signTreaty()" id="treaty-btn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold transition-all active:scale-95">👉 SIGN TO STOP FIGHTING 👈</button>
+                <p id="treaty-status" class="mt-4 text-xs text-emerald-400 italic h-4 font-light"></p>
+            </div>
+        </section>
+
+        <!-- THE NAVYA METER -->
+        <section class="max-w-xl mx-auto px-6 my-24 text-center">
+            <div class="bg-slate-900/60 border border-slate-800/80 rounded-3xl p-8 backdrop-blur-sm">
+                <h3 class="font-fun font-bold text-2xl text-slate-100 mb-6">📊 The Official Navya Meter</h3>
+                <p class="text-xs text-slate-400 mb-6">Click the buttons to check your daily report!</p>
+                
+                <div class="space-y-4 max-w-xs mx-auto">
+                    <button onclick="showMeterResult('Naughty Level', '99.9% Extremely Drama Queen! 😜')" class="w-full py-3 bg-slate-800/50 hover:bg-sky-500/20 rounded-xl border border-slate-700 text-sm font-medium transition-all active:scale-95">How Naughty Am I? 🤔</button>
+                    <button onclick="showMeterResult('Cute Level', '100000% Infinite Softness! 🌸')" class="w-full py-3 bg-slate-800/50 hover:bg-sky-500/20 rounded-xl border border-slate-700 text-sm font-medium transition-all active:scale-95">How Cute Am I? 🥺</button>
+                    <button onclick="showMeterResult('Bunty Love Level', 'Error: Numbers are too small to count your love! ❤️')" class="w-full py-3 bg-slate-800/50 hover:bg-sky-500/20 rounded-xl border border-slate-700 text-sm font-medium transition-all active:scale-95">How much does Bunty love me? 🐻</button>
+                </div>
+                <div id="meter-display" class="mt-6 text-sky-400 font-fun font-medium text-base p-3 bg-slate-950/50 rounded-xl hidden"></div>
+            </div>
+        </section>
+
+        <!-- VIRTUAL TREAT REVEALER -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl">
+                <h3 class="font-fun font-bold text-xl text-slate-200 mb-2">🍕 What do you want to eat?</h3>
+                <p class="text-xs text-slate-400 mb-4">Click your mood treat and see the magic pop!</p>
+                <div class="flex justify-center space-x-3">
+                    <button onclick="rainFood('🍕')" class="px-4 py-2 bg-slate-800 rounded-xl border border-slate-700 text-base">Pizza 🍕</button>
+                    <button onclick="rainFood('🍦')" class="px-4 py-2 bg-slate-800 rounded-xl border border-slate-700 text-base">Ice-Cream 🍦</button>
+                    <button onclick="rainFood('😋💖')" class="px-4 py-2 bg-slate-800 rounded-xl border border-slate-700 text-base">Golgappe 🥣</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE SECRET FORTUNE WHEEL -->
+        <section class="max-w-xl mx-auto px-6 my-24 text-center">
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950/40 border border-slate-800 rounded-3xl p-8 backdrop-blur-sm shadow-xl">
+                <h3 class="font-fun font-bold text-2xl text-slate-100 mb-2">✨ Navya's Magic Spin Box</h3>
+                <p class="text-xs text-slate-400 mb-6">Spin the virtual wheel to unlock a random cute prediction!</p>
+                
+                <button onclick="spinTheMagicBox()" id="spin-btn" class="px-8 py-3 bg-gradient-to-r from-sky-400 to-blue-600 hover:from-sky-500 hover:to-blue-700 text-slate-950 font-fun font-semibold text-sm rounded-full transition-all active:scale-95 shadow-lg shadow-sky-500/20 cursor-pointer">
+                    ✨ SPIN NOW
+                </button>
+                <div id="spin-result" class="mt-6 text-xl text-yellow-300 font-cursive tracking-wider h-6 font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- Interactive Cake Section -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <div class="bg-slate-900/40 border border-slate-800/60 rounded-3xl p-8 backdrop-blur-sm">
+                <span class="text-[10px] tracking-widest uppercase font-fun text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full">Time for Ritual 🎂</span>
+                <h3 class="text-2xl font-fun font-semibold mt-4 mb-4 text-slate-100">Make a wish & Cut the cake!</h3>
+                <div class="inline-block cursor-pointer" onclick="sliceCake()">
+                    <div id="cake-display" class="text-8xl hover:scale-110 active:scale-95 transition-transform duration-300 select-none">🎂</div>
+                    <p id="cake-status" class="text-xs text-slate-500 mt-4 font-medium animate-pulse">Click the cake to slice it!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUNTY MEMORY LEAK -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl">
+                <h4 class="font-fun font-semibold text-slate-200 mb-1">🐻 System Alert: Memory Usage</h4>
+                <p class="text-[11px] text-slate-500 mb-3">How many times Bunty thought about Navya today?</p>
+                <div id="counter-box" class="text-3xl font-fun font-bold text-sky-400">0</div>
+                <button onclick="triggerCounter()" id="count-btn" class="mt-3 text-xs bg-slate-800 px-3 py-1.5 border border-slate-700 text-slate-400 hover:text-white rounded-md">Run Scanner 🔍</button>
+            </div>
+        </section>
+
+        <!-- MOOD FIXER MATRIX -->
+        <section class="max-w-xl mx-auto px-6 my-24 text-center">
+            <div class="bg-slate-900/50 border border-slate-800/80 rounded-3xl p-8 backdrop-blur-sm">
+                <h3 class="font-fun font-bold text-2xl text-slate-100 mb-2">🩹 Emergency Mood Fixer</h3>
+                <p class="text-xs text-slate-400 mb-6">Whenever you are feeling down in the future, just open this and tap your mood!</p>
+                
+                <div class="grid grid-cols-3 gap-3 max-w-sm mx-auto">
+                    <button onclick="fixMood('sad')" class="py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold hover:border-sky-400 active:scale-95 transition-all">🥺 Sad</button>
+                    <button onclick="fixMood('angry')" class="py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold hover:border-sky-400 active:scale-95 transition-all">😡 Angry</button>
+                    <button onclick="fixMood('bored')" class="py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold hover:border-sky-400 active:scale-95 transition-all">🥱 Bored</button>
+                </div>
+                <div id="mood-response" class="mt-6 text-sm text-sky-300 font-light italic leading-relaxed h-20 transition-all duration-300"></div>
+            </div>
+        </section>
+
+        <!-- VIRTUAL CHOCOLATE BOX -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <h3 class="font-fun font-bold text-2xl mb-2 text-slate-100">🍫 Your Virtual Candy Box</h3>
+            <p class="text-xs text-slate-400 mb-6">Since I can't give it directly, click your favorite to eat it! 😉</p>
+            <div class="grid grid-cols-3 gap-4 max-w-xs mx-auto">
+                <button onclick="eatCandy('Dairy Milk 🍫')" class="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-3xl hover:border-sky-400 active:scale-90 transition-all">🍫</button>
+                <button onclick="eatCandy('Sweet Lollipop 🍭')" class="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-3xl hover:border-sky-400 active:scale-90 transition-all">🍭</button>
+                <button onclick="eatCandy('Yummy Ice-Cream 🍦')" class="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-3xl hover:border-sky-400 active:scale-90 transition-all">🍦</button>
+            </div>
+            <p id="candy-status" class="text-sm text-emerald-400 font-medium mt-4 h-4"></p>
+        </section>
+
+        <!-- Chronology Cute Timeline -->
+        <section class="max-w-2xl mx-auto px-6 my-28">
+            <h3 class="font-fun font-bold text-3xl text-center mb-12 text-slate-100">Our Cutest Chapters 📖</h3>
+            <div class="space-y-10 relative before:absolute before:top-0 before:bottom-0 before:left-6 before:w-[1px] before:bg-slate-800">
+                
+                <div class="flex items-start space-x-6 relative">
+                    <div class="bg-slate-900 border border-slate-700 w-12 h-12 rounded-full flex items-center justify-center text-sky-400 text-sm font-bold z-10 shadow-xl">01</div>
+                    <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-2xl flex-1">
+                        <span class="text-xs text-sky-400 font-bold tracking-widest uppercase font-fun block mb-1">That Weird First Day</span>
+                        <p class="text-sm text-slate-400 font-light">We started talking as absolute strangers, and I never thought you would become the most important person in my life.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-6 relative">
+                    <div class="bg-slate-900 border border-slate-700 w-12 h-12 rounded-full flex items-center justify-center text-sky-400 text-sm font-bold z-10 shadow-xl">02</div>
+                    <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-2xl flex-1">
+                        <span class="text-xs text-sky-400 font-bold tracking-widest uppercase font-fun block mb-1">Non-Stop Talks</span>
+                        <p class="text-sm text-slate-400 font-light">Late night silly arguments, listening to you talk about your day, and realizing that your voice is my favorite sound.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DIGITAL WISHES BOX -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl">
+                <h4 class="font-fun font-semibold text-slate-200 mb-4">📬 Open Bunty's Little Wishes Box</h4>
+                <button onclick="revealSecretWish()" class="w-14 h-14 bg-indigo-600 rounded-full text-xl text-white shadow-lg active:scale-95 transition-transform cursor-pointer">💌</button>
+                <div id="secret-wish-display" class="mt-4 text-xs font-light text-slate-400 italic h-10 leading-relaxed transition-all duration-300"></div>
+            </div>
+        </section>
+
+        <!-- Poetic Prose Section -->
+        <section class="max-w-2xl mx-auto px-6 my-24 text-center">
+            <div class="w-8 h-[1px] bg-slate-700 mx-auto mb-6"></div>
+            <div class="text-3xl font-cursive text-slate-300 leading-relaxed tracking-wide">
+                <p>"आसमान के बादलों से पूछना कभी,<br>मैं हर दुआ में सिर्फ तुम्हारा नाम लेता हूँ।"</p>
+            </div>
+            <div class="w-8 h-[1px] bg-slate-700 mx-auto mt-6"></div>
+        </section>
+
+        <!-- PREMIUM SONGS AUDIO PLAYER -->
+        <section class="max-w-md mx-auto px-6 my-24 text-center">
+            <div class="bg-gradient-to-r from-slate-950 to-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                <h4 class="font-fun font-semibold text-sky-400 text-sm mb-3">🎵 Press Play for a Special Vibe</h4>
+                <p class="text-[11px] text-slate-500 mb-4">A melody curated for this exact moment</p>
+                <audio controls class="w-full mx-auto outline-none filter invert opacity-80">
+                    <source src="song.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </section>
+
+        <!-- Simple Cute Promises -->
+        <section class="max-w-3xl mx-auto px-6 my-28">
+            <h3 class="text-center font-fun font-bold text-2xl mb-10 text-slate-200">Pinky Promises To You 🤞</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/30 border border-slate-800/80 p-6 rounded-2xl">
+                    <div class="text-sky-400 text-xl mb-2">🐻</div>
+                    <h4 class="font-fun font-medium text-slate-200 mb-1">I will stay forever</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed font-light">No matter what happens, I will always hold your hand tight and never leave your side.</p>
+                </div>
+                <div class="bg-slate-900/30 border border-slate-800/80 p-6 rounded-2xl">
+                    <div class="text-sky-400 text-xl mb-2">🌸</div>
+                    <h4 class="font-fun font-medium text-slate-200 mb-1">Always Cheering For You</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed font-light">To support all your dreams, listen to your dramas, and protect your beautiful smile every single day.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Love Letter Section (Your Emotional & Mature Note) -->
+        <section class="max-w-xl mx-auto px-6 my-24">
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 p-8 rounded-3xl shadow-2xl border border-slate-800/80 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-sky-400 to-blue-500"></div>
+                <h3 class="font-cursive text-5xl text-sky-400 mb-4">Forever Your Safe Space</h3>
+                
+                <div class="text-left text-sm text-slate-300 font-light leading-relaxed space-y-4 mb-8">
+                    <p>Happy Birthday Navya! I hope this little digital space brings a tiny smile to your face today.</p>
+                    <p class="border-l-2 border-sky-400 pl-3 italic text-slate-400 text-xs">
+                        "चाहे हमारे बीच कितनी भी लड़ाई हो जाए, या कितनी भी दूरियां आ जाएं... तुम मेरे लिए हमेशा उतनी ही ख़ास रहोगी जितनी हमेशा से थी। वो जगह कोई नहीं ले सकता।"
+                    </p>
+                    <p>
+                        लाइफ़ में कभी भी, किसी भी चीज़ की ज़रूरत हो, या सिर्फ़ कोई बात शेयर करनी हो, बिना किसी झिझक के बस एक मैसेज कर देना। यह बंदा तुम्हारे लिए हमेशा हाज़िर रहेगा, जैसे पहले रहता था।
+                    </p>
+                    <p class="text-xs text-slate-400">
+                        बाकी, मैं तुम्हें बात करने के लिए बिल्कुल भी भाई फ़ोर्स या मजबूर नहीं करूँगा। मैं बस चाहता हूँ कि तुम हमेशा खुश रहो, मुस्कुराती रहो, और अपने सारे सपने पूरे करो। 🌻
+                    </p>
+                </div>
+                
+                <div class="text-[10px] tracking-widest text-slate-500 uppercase font-semibold font-fun">Always Wishing the Best for You,</div>
+                <div class="font-cursive text-4xl text-slate-200 mt-1">Bunty 🐻❤️</div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- PHOTO LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 bg-slate-950/95 z-50 hidden flex-col items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
+        <div class="relative max-w-4xl max-h-[80vh] overflow-hidden rounded-xl border border-slate-800 shadow-2xl">
+            <img id="lightbox-img" src="" alt="Zoomed" class="max-w-full max-h-[75vh] object-contain transition-transform duration-300 scale-95">
+        </div>
+        <p id="lightbox-caption" class="font-cursive text-4xl text-sky-400 mt-4 text-center tracking-wide"></p>
+    </div>
+
+    <!-- Javascript System Code -->
+    <script>
+        const CORRECT_PIN = "1607"; 
+        let currentPin = "";
+        let currentMemoryIndex = 0;
+
+        const lockScreen = document.getElementById('lock-screen');
+        const mainContent = document.getElementById('main-content');
+        const dots = document.querySelectorAll('.pin-dot');
+        const errorMsg = document.getElementById('error-msg');
+        const flashEffect = document.getElementById('flash-effect');
+
+        function pressKey(num) {
+            if (currentPin.length < 4) { currentPin += num; updateDots(); errorMsg.classList.add('hidden'); }
+            if (currentPin.length === 4) { setTimeout(checkPin, 200); }
+        }
+
+        function clearPin() { currentPin = ""; updateDots(); errorMsg.classList.add('hidden'); }
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                if (index < currentPin.length) {
+                    dot.className = "pin-dot w-3.5 h-3.5 rounded-full bg-sky-400 border border-sky-400 shadow-[0_0_8px_#38bdf8] transition-all duration-200";
+                } else {
+                    dot.className = "pin-dot w-3.5 h-3.5 rounded-full border border-slate-600 bg-transparent transition-all duration-200";
+                }
+            });
+        }
+
+        function checkPin() {
+            if (currentPin === CORRECT_PIN) {
+                confetti({ particleCount: 140, spread: 70, origin: { y: 0.6 }, colors: ['#38bdf8', '#ffffff', '#f43f5e'] });
+                lockScreen.classList.add('opacity-0', 'pointer-events-none');
+                mainContent.classList.remove('hidden');
+                document.body.classList.remove('no-scroll');
+                setTimeout(() => { mainContent.classList.add('opacity-100'); }, 100);
+            } else { errorMsg.classList.remove('hidden'); currentPin = ""; updateDots(); }
+        }
+
+        function triggerCamera() {
+            flashEffect.style.opacity = '1'; setTimeout(() => flashEffect.style.opacity = '0', 100);
+            confetti({ particleCount: 30, spread: 50 });
+            const cards = document.querySelectorAll('.memory-card');
+            if (currentMemoryIndex < cards.length) { cards[currentMemoryIndex].classList.add('reveal'); currentMemoryIndex++; }
+        }
+
+        function openLightbox(element) {
+            const imgUrl = element.querySelector('img').src;
+            const captionText = element.querySelector('p').innerText;
+            document.getElementById('lightbox-img').src = imgUrl;
+            document.getElementById('lightbox-caption').innerText = captionText;
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('hidden'); lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() { const lightbox = document.getElementById('lightbox'); lightbox.classList.add('hidden'); lightbox.classList.remove('flex'); }
+
+        function showMeterResult(title, response) {
+            const display = document.getElementById('meter-display');
+            display.classList.remove('hidden');
+            display.innerHTML = `<strong>${title}:</strong> ${response}`;
+            confetti({ particleCount: 15, spread: 30 });
+        }
+
+        function signTreaty() {
+            document.getElementById('treaty-btn').innerText = "✅ TREATY SIGNED BY NAVYA";
+            document.getElementById('treaty-btn').className = "w-full py-3 bg-slate-800 border border-emerald-500/40 text-emerald-400 rounded-xl text-sm font-semibold pointer-events-none";
+            document.getElementById('treaty-status').innerText = "Status: Fighting frozen successfully. Funs enabled! 🎉";
+            confetti({ particleCount: 40, spread: 60 });
+        }
+
+        function rainFood(emoji) {
+            let end = Date.now() + (1.5 * 1000);
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+
+        function triggerCounter() {
+            let box = document.getElementById('counter-box');
+            let current = 0; let target = 99999;
+            let interval = setInterval(() => {
+                current += 3333;
+                if(current >= target) {
+                    current = "100000+ (System Crashed! ❤️)"; clearInterval(interval);
+                    document.getElementById('count-btn').style.display = 'none';
+                    confetti({ particleCount: 30, spread: 40 });
+                }
+                box.innerText = current;
+            }, 40);
+        }
+
+        function eatCandy(candyName) {
+            const status = document.getElementById('candy-status');
+            status.innerText = `Chomp chomp! You ate ${candyName} 😋`;
+            confetti({ particleCount: 20, angle: 90, spread: 40 });
+            setTimeout(() => { status.innerText = ""; }, 3000);
+        }
+
+        const fortuneQuotes = [
+            "⭐ Navya will get a massive surprise gift very soon!",
+            "🍦 Bunty will buy you your favorite Ice Cream this week!",
+            "✨ Today is going to be the happiest day of your year!",
+            "🧸 A giant teddy bear is missing you somewhere right now!",
+            "🍫 You have just unlocked free chocolates for the next month!"
+        ];
+        function spinTheMagicBox() {
+            const resultBox = document.getElementById('spin-result');
+            resultBox.innerText = "🌀 Spinning the magic box...";
+            setTimeout(() => {
+                const randomQuote = fortuneQuotes[Math.floor(Math.random() * fortuneQuotes.length)];
+                resultBox.innerText = randomQuote;
+                confetti({ particleCount: 30, colors: ['#fbbf24', '#ffffff'] });
+            }, 1000);
+        }
+
+        // 🩹 EMERGENCY MOOD FIXER WITH PERSONAL LOVE CODE
+        function fixMood(type) {
+            const box = document.getElementById('mood-response');
+            if(type === 'sad') box.innerText = "It's completely okay to feel sad, Navya. Just remember, whatever happens, Bunty is always here for you. No pressure to talk at all, but if you ever need anything, I'm just one text away. 💕";
+            if(type === 'angry') box.innerText = "मारने हीइइइ लगेंगे अइइइभी! 😂 गुस्सा थूक दो और ठंडा पानी पियो... I am waiting to see that pretty smile return! 🥤";
+            if(type === 'bored') box.innerText = "Bored? Scroll up and tap on the food tabs, spin the wheel, or let's do something fun! 🤪";
+        }
+
+        const secretWishes = [
+            "May your beautiful smile never fade away! 😊",
+            "I hope you clear all your upcoming exams with super top marks! 📚",
+            "May you always stay healthy, hyper energetic, and chaotic! 🏃‍♀️",
+            "I wish we celebrate 100 more birthdays together like this! 🎂"
+        ];
+        let wishIndex = 0;
+        function revealSecretWish() {
+            const container = document.getElementById('secret-wish-display');
+            container.innerText = secretWishes[wishIndex];
+            wishIndex = (wishIndex + 1) % secretWishes.length;
+            confetti({ particleCount: 15, spread: 40 });
+        }
+
+        let isCakeCut = false;
+        function sliceCake() {
+            if(!isCakeCut) {
+                isCakeCut = true;
+                document.getElementById('cake-display').innerText = "🍰✨";
+                document.getElementById('cake-status').innerHTML = "✨ Happy Birthday Navya! Cake Cut successfully! 🎉";
+                document.getElementById('cake-status').className = "text-sm text-sky-400 mt-4 font-semibold animate-pulse";
+                let end = Date.now() + (3 * 1000);
+                (function frame() {
+                    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+                    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+                    if (Date.now() < end) { requestAnimationFrame(frame); }
+                }());
+            }
+        }
+    </script>
+</body>
+</html>
+
